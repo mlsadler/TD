@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TD5", "TD5\TD5.vcxproj", "{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Debug|x64.ActiveCfg = Debug|x64
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Debug|x64.Build.0 = Debug|x64
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Debug|x86.ActiveCfg = Debug|Win32
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Debug|x86.Build.0 = Debug|Win32
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Release|x64.ActiveCfg = Release|x64
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Release|x64.Build.0 = Release|x64
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Release|x86.ActiveCfg = Release|Win32
+		{BAEC910A-8BF5-4A6A-AC97-98F6045716A4}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96CD8683-5A79-479A-B2E9-272276EDD9E7}
+	EndGlobalSection
+EndGlobal
