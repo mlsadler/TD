@@ -20,7 +20,7 @@
 using namespace std;
 
 #pragma endregion //}
-//sa va tu amarcher??
+//bonjour
 
 void tests_partie1()
 {
