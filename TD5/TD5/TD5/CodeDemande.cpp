@@ -104,7 +104,7 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 
 	// TODO: Écrire les cibles dans le fichier.
 	fichier.write((char*)& journal.cibles, sizeof(journal.cibles));
-	//////fdjfjgfdgjfgjjs sa va marcher
+	
 }
 
 
