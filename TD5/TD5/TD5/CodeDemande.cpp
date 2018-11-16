@@ -118,24 +118,25 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 	// TODO: Se positionner (têtes de lecture et d'écriture) au début de la cible 
 	//       à l'index donné. On parle ici de l'index dans le fichier, donc 0 est
 	//       la première cible dans le fichier, etc.
-	f_InOut.seekg(index, ios::beg);
-
+	f_InOut.seekg(index*sizeof(Cible), ios::beg);
+	f_InOut.seekp(index*sizeof(Cible), ios::beg);
 
 	// TODO: Lire cette cible.
 	//       ATTENTION! Vous ne devez lire que cette cible isolée, pas tout le
 	//       tableau.
 	Cible cible;
-	f_InOut.read((char*)& cible, sizeof(cible));
+	f_InOut.read((char*)& cible, sizeof(Cible));
+	
 
 	// TODO: Copier l'observation donnée en paramètre dans la cible.
 	//       Astuce : strcpy()
 
-	char obs[TAILLE_OBSERVATION];
-	strcpy_s(obs, observation.c_str());
-	strcpy(cible.observation, obs);
+	char observationC[TAILLE_OBSERVATION];
+	strcpy_s(observationC, observation.c_str());
+	strcpy(cible.observation, observationC);
 
 	// TODO: Réécrire la cible (et seulement celle-là) dans le fichier.
-	f_InOut.seekp(index, ios::beg);
+	
 	f_InOut.write((char*)& cible, sizeof(cible));
 }
 
@@ -143,8 +144,9 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 ListeCibles allouerListe(size_t capacite)
 {
 	// TODO: Créer une 'ListeDonnee' vide (nbElements = 0) avec la capacité donnée.
-	
 	// TODO: Allouer un tableau de 'Cible' de la taille demandée.
+	Cible* listeDonnee;
+	listeDonnee = new Cible[capacite];
 	return {};
 }
 

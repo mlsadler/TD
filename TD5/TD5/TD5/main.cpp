@@ -110,6 +110,7 @@ void tests_partie1()
 	//
 
 	ecrireObservation(nomFichierTestJournal, 1, "blablabla");
+	
 
 }
 
