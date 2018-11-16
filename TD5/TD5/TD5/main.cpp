@@ -101,6 +101,7 @@ void tests_partie1()
 	bool ok;
 	ecrireJournalDetection(nomFichierTestJournal, exempleJournalDetection, ok);
 	cout << endl<<boolalpha<<"La creation du fichier fonctionne-t-il: " <<ok;
+	cout << "La grandeur du fichier est: " << sizeof(nomFichierTestJournal) << endl;
 
 
 
