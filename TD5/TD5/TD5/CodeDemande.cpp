@@ -55,7 +55,7 @@ void retirerCible(ListeCibles& liste, uint32_t id)
 		}
 	}
 }
-
+//////////////////////////////////////////////////////// quand tu enleve un element t tu supposer changer les nom(test)
 
 void lireCibles(istream& fichier, ListeCibles& cibles)
 {
@@ -89,12 +89,22 @@ void ecrireCibles(ostream& fichier, const ListeCibles& cibles)
 void ecrireJournalDetection(const string& nomFichier, const JournalDetection& journal, bool& ok)
 {
 	// TODO: Ouvrir un fichier en écriture binaire.
-	
+	ofstream fichier;
+	fichier.open(nomFichier, ios::binary);
+
 	// TODO: Indiquer la réussite ou l'échec de l'ouverture dans 'ok'.
-	
+	if (fichier.fail()) {
+		ok = false;
+	}
+	else {
+		ok = true;
+	}
 	// TODO: Écrire les paramètres de mission dans le fichier.
-	
+	fichier.write((char*)& journal.parametres, sizeof(journal.parametres));
+
 	// TODO: Écrire les cibles dans le fichier.
+	fichier.write((char*)& journal.cibles, sizeof(journal.cibles));
+
 }
 
 
@@ -119,8 +129,7 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 
 	// TODO: Copier l'observation donnée en paramètre dans la cible.
 	//       Astuce : strcpy()
-
-	strcpy(cible, observation);
+	
 
 	// TODO: Réécrire la cible (et seulement celle-là) dans le fichier.
 	f_InOut.seekp(index, ios::beg);
