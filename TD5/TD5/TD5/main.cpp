@@ -24,9 +24,7 @@ using namespace std;
 //oh hi mark
 
 void tests_partie1()
-////heloooo
-//sa la marcher rissss
-//;klk;l;klj;kl;klk
+
 {
 	// Dans la partie 1, on déclare une liste de cibles avec un tableau statique, puisque l'allocation dynamique est vue en classe seulement la semaine suivante.
 	Cible tableauCibles[3] = {};
