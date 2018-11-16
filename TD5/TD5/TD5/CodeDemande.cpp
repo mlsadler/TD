@@ -109,7 +109,7 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 
 
 void ecrireObservation(const string& nomFichier, size_t index, const string& observation)
-{
+{//vdsajdkasdjadskha
 	// TODO: Ouvrir un fichier en lecture/écriture binaire.
 
 	fstream f_InOut;
