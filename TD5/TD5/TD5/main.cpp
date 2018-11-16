@@ -108,15 +108,21 @@ void tests_partie1()
 	//
 
 	ecrireObservation(nomFichierTestJournal, 1, "blablabla");
-	
+	////COUT QUOI?
 
 }
 
 void tests_partie2()
 {
 	//TODO: Allouer une liste de cibles (allouerListe) de capacité 2; vérifier que la capacité est la bonne et que le nombre d'éléments est zéro.
+	int capacite = 2;
+	ListeCibles listeTest = allouerListe(capacite);
+	cout << listeTest.nbElements;
+
 	//TODO: Ajouter une cible la liste; ça devrait fonctionner.
+	//ajouterCible(listeTest, );//////////////////////////////////////////////////////////////////////what de la fuck?
 	//TODO: Conserver le pointeur vers le tableau de cibles dans une variable.
+	
 	//TODO: Désallouer la liste (desallouerListe); vérifier que les valeurs sont à zéro.
 	//TODO: Allouer une nouvelle liste de cibles de capacité 2; vérifier que son pointeur est le même que celui conservé ci-dessus.  NOTE: Il n'y a pas de manière dans le standard ISO C++ pour vérifier que la mémoire a bien été désallouée.  Ce test n'est donc pas standard et pourrait échouer même si le programme est correct, mais on a la garantie qu'il peut réussir uniquement si la désallocation est faite.
 	//TODO: Désallouer cette deuxième liste.

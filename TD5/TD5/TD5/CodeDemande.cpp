@@ -55,7 +55,7 @@ void retirerCible(ListeCibles& liste, uint32_t id)
 		}
 	}
 }
-//////////////////////////////////////////////////////// quand tu enleve un element t tu supposer changer les nom(test)
+
 
 void lireCibles(istream& fichier, ListeCibles& cibles)
 {
@@ -100,10 +100,11 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 		ok = true;
 	}
 	// TODO: Écrire les paramètres de mission dans le fichier.
-	fichier.write((char*)& journal.parametres, sizeof(journal.parametres));
+	fichier.write((char*)& journal.parametres, sizeof(journal.parametres)); ////////////////// est-ce que il a un parametre par element ou 1 pour tous
 
 	// TODO: Écrire les cibles dans le fichier.
-	fichier.write((char*)& journal.cibles, sizeof(journal.cibles));
+	ecrireCibles(fichier, journal.cibles);
+
 	
 }
 
@@ -145,9 +146,9 @@ ListeCibles allouerListe(size_t capacite)
 {
 	// TODO: Créer une 'ListeDonnee' vide (nbElements = 0) avec la capacité donnée.
 	// TODO: Allouer un tableau de 'Cible' de la taille demandée.
-	Cible* listeDonnee;
-	listeDonnee = new Cible[capacite];
-	return {};
+	ListeCibles listeDonnee;
+	listeDonnee.elements= new Cible[capacite];
+	return listeDonnee;
 }
 
 
@@ -155,23 +156,46 @@ void desallouerListe(ListeCibles& cibles)
 {
 	// TODO: Désallouer le tableau d'élément.
 	// TODO: Remettre les membres à zéro.
+	delete[] &cibles.elements;
+	cibles.elements = nullptr;
 }
 
 
 JournalDetection lireJournalDetection(const string& nomFichier, bool& ok)
 {
+	JournalDetection journalDetection;
+
+
 	// TODO: Ouvrir un fichier en lecture binaire.
-	
+	ifstream fichierLire;
+	fichierLire.open(nomFichier, ios::binary);
 	// TODO: Indiquer la réussite ou l'échec de l'ouverture dans 'ok'.
-	
+	if (fichierLire.fail()) { ////////////////////////////////////////////////////// est ce que je devrais mettre tous le reste de la foncrion dans le if
+		ok = false;
+	}
+	else {
+		ok = true;
+	}
+
 	// TODO: Lire les paramètres de mission
-	
+	fichierLire.seekg(0, ios::beg);
+	fichierLire.read((char*)& journalDetection.parametres, sizeof(journalDetection.parametres));
+
 	// TODO: Compter le nombre de cibles dans le fichier.
-	
+	int nbCibles = 0;
+	while (fichierLire.peek() != EOF){
+		fichierLire.read((char*)& journalDetection.cibles.elements , sizeof(journalDetection.cibles.elements));
+		nbCibles++;
+	}
+
 	// TODO: Allouer la liste de cibles avec la bonne capacité.
-	
+	journalDetection.cibles = allouerListe(nbCibles);
+
 	// TODO: Lire les cibles.
-	return {};
+	fichierLire.seekg(sizeof(journalDetection.parametres), ios::beg);
+	lireCibles(fichierLire, journalDetection.cibles);
+
+	return journalDetection;
 }
 
 #pragma endregion //}
