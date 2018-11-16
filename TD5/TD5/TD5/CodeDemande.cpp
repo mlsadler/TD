@@ -28,6 +28,10 @@ using namespace std;
 void ajouterCible(ListeCibles& liste, const Cible& element)
 {
 	// TODO: S'il reste de la place, ajouter l'élément à la fin.
+	if (liste.capacite > liste.nbElements) {
+		liste.elements[liste.nbElements] = element;
+		liste.nbElements++;
+	}
 }
 
 
@@ -36,21 +40,49 @@ void retirerCible(ListeCibles& liste, uint32_t id)
 	// TODO: Rechercher la cible avec le même ID et le retirer de la liste si
 	//       présent. ATTENTION! On parle bien de Cible::id, pas de l'index
 	//       dans le tableau.
+
+	for (int i = 0; i < liste.nbElements - 1; i++) {
+		if (liste.elements[i].id == id) {
+			for (int j = i; j < liste.nbElements - 1; j++) {
+				liste.elements[j] = liste.elements[j + 1];
+
+			}
+			liste.nbElements--;
+		}
+		else if (liste.elements[liste.nbElements - 1].id == id) {
+			liste.nbElements--;
+		}
+	}
 }
 
 
 void lireCibles(istream& fichier, ListeCibles& cibles)
 {
 	// TODO: Tant que la fin de fichier n'est pas atteinte :
-		// TODO: Lire une 'Cible' à partir du ficher à la position
-		//       courante et l'ajouter à la liste.
+	// TODO: Lire une 'Cible' à partir du ficher à la position
+	//       courante et l'ajouter à la liste.
+
+	Cible cible;
+	while (fichier.peek() != EOF) {
+		fichier.read((char*)& cible, sizeof(cible));
+		ajouterCible(cibles, cible);
+
+	}
 }
 
 
 void ecrireCibles(ostream& fichier, const ListeCibles& cibles)
 {
 	// TODO: Écrire tous les éléments de la liste dans le fichier à partir de la position courante.
+
+	for (int i = 0; i < cibles.nbElements; i++) {
+		fichier.write((char*)& cibles.elements[i], sizeof(cibles.elements[i]));
+
+	}
+
+
 }
+
 
 
 void ecrireJournalDetection(const string& nomFichier, const JournalDetection& journal, bool& ok)

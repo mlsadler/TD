@@ -34,18 +34,59 @@ void tests_partie1()
 
 	//TODO: Ajouter 3 fois une cible (ajouterCible) à la cibles, chacun avec un ID différent (les autres valeurs ne sont pas importantes);
 	//TODO: après chaque ajout vérifier que le nombre de cibles est bon (i.e. 1 après le premier ajout, 2 après le deuxième), et que les données de la cible sont dans la liste (vérifiez uniquement l'ID).
+	Cible cible1, cible2, cible3, cible4;
+	cible1.id = 1;
+	cible2.id = 2;
+	cible3.id = 3;
+
+	cout << "nb element avant ajout: " << cibles.nbElements << endl;
+	ajouterCible(cibles, cible1);
+	cout << "nb element apres 1 ajout: " << cibles.nbElements << endl;
+	ajouterCible(cibles, cible2);
+	cout << "nb element apres 2 ajout: " << cibles.nbElements << endl;
+	ajouterCible(cibles, cible3);
+	cout << "nb element apres 3 ajout: " << cibles.nbElements << endl;
+
+	cout << "tableauCibles: ";
+	for (int i = 0; i < cibles.nbElements; i++)
+		cout << tableauCibles[i].id << ' ';
+
+
 	//TODO: Ajouter une autre cible, le nombre d'éléments devrait être encore 3 puisque c'est la capacité de la liste.
+
+	cible4.id = 4;
+	ajouterCible(cibles, cible4);
+	cout << endl << "tableauCibles apres un ajout supp: ";
+	for (int i = 0; i < cibles.nbElements; i++)
+		cout << tableauCibles[i].id << ' ';
+
+
+
 
 	//TODO: Retirer la cible (retirerCible) ayant l'ID que vous avez mis en 2e, vérifier qu'il reste 2 éléments aux indices 0 et 1 dont les ID sont les bons.
 
-	fstream fichierTestCibles("fichierTestCibles.bin", ios::in | ios::out  | ios::trunc | ios::binary);
+	fstream fichierTestCibles("fichierTestCibles.bin", ios::in | ios::out | ios::trunc | ios::binary);
+
+	retirerCible(cibles, 2);
+	cout << endl << "Liste d'element apres avoir un element: ";
+	for (int i = 0; i < cibles.nbElements; i++)
+		cout << tableauCibles[i].id << " ";
+	cout << endl << "Nombre d'element apres le avoir retier un element: " << cibles.nbElements;
 
 	//TODO: Écrire les cibles (ecrireCibles) dans le fichier fichierTestCibles. Vérifier que la tête d'écriture est rendue au bon endroit.
 
 	Cible tableauCibles2[3] = {};
 	ListeCibles cibles2 = { tableauCibles2, 0, size(tableauCibles) };
 
+	ecrireCibles(fichierTestCibles, cibles);
+
+
 	//TODO: Remettre la tête de lecture au début du fichier puis lire les cibles (lireCibles) dans cibles2. Vérifier que les 2 bonnes cibles y sont.
+	fichierTestCibles.seekg(0, ios::beg);
+	lireCibles(fichierTestCibles, cibles2);
+	cout << endl << "Nombre d'element cibles2: " << cibles2.nbElements << endl << "Lecture de cibles2: ";
+	for (int i = 0; i < cibles2.nbElements; i++)
+		cout << cibles2.elements[i].id << " ";
 
 	//TODO: Créer une variable de type JournalDetection avec des valeurs quelconques et une ListeCibles déjà créé ci-dessus.
 	//TODO: Écrire ce journal (ecrireJournalDetection) dans un nouveau fichier binaire.
