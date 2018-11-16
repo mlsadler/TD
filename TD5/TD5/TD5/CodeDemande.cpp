@@ -129,10 +129,14 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 
 	// TODO: Copier l'observation donnée en paramètre dans la cible.
 	//       Astuce : strcpy()
-	
+
+	char obs[TAILLE_OBSERVATION];
+	strcpy_s(obs, observation.c_str());
+	strcpy(cible.observation, obs);
 
 	// TODO: Réécrire la cible (et seulement celle-là) dans le fichier.
 	f_InOut.seekp(index, ios::beg);
+	f_InOut.write((char*)& cible, sizeof(cible));
 }
 
 
