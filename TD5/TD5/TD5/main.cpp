@@ -109,7 +109,8 @@ void tests_partie1()
 	//NOTE: Même chose que ci-dessus: la taille du fichier ne devrait pas avoir changée, et dans l'éditeur binaire vous devriez voir le texte après le deuxième ID.
 	//
 
-	ecrireObservation(fichier.data, )
+	ecrireObservation(nomFichierTestJournal, 1, "blablabla");
+
 }
 
 void tests_partie2()
