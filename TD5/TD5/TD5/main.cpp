@@ -93,15 +93,13 @@ void tests_partie1()
 
 	JournalDetection exempleJournalDetection;
 	exempleJournalDetection.cibles = cibles2;
-	char nom[5] = "allo";
-	//exempleJournalDetection.parametres.nom= nom;
-	cout <<endl<<"nombre de cible : "<<exempleJournalDetection.cibles.nbElements;
-	//cout << endl << exempleJournalDetection.parametres.nom;
+	char nom[] = "allokhkk";
+	strcpy(exempleJournalDetection.parametres.nom, nom);
 	string nomFichierTestJournal = "fichierTestjournal";
 	bool ok;
 	ecrireJournalDetection(nomFichierTestJournal, exempleJournalDetection, ok);
 	cout << endl<<boolalpha<<"La creation du fichier fonctionne-t-il: " <<ok<<endl;
-	cout << "La grandeur du fichier est: " << sizeof(exempleJournalDetection) << endl;
+	
 
 
 
