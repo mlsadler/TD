@@ -99,6 +99,11 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 
 void ecrireObservation(const string& nomFichier, size_t index, const string& observation)
 {
+	//je vois rien
+
+
+
+
 	// TODO: Ouvrir un fichier en lecture/écriture binaire.
 	
 	// TODO: Se positionner (têtes de lecture et d'écriture) au début de la cible 
