@@ -20,7 +20,6 @@
 using namespace std;
 
 #pragma endregion //}
-//bonjour
 
 void tests_partie1()
 {
@@ -102,8 +101,9 @@ void tests_partie1()
 
 	//TODO: Ajouter une observation (ecrireObservation) au fichier créé ci-dessus à l'indice 1 (deuxième cible).
 	//NOTE: Même chose que ci-dessus: la taille du fichier ne devrait pas avoir changée, et dans l'éditeur binaire vous devriez voir le texte après le deuxième ID.
-
 	//
+
+	ecrireObservation(fichier.data, )
 }
 
 void tests_partie2()
