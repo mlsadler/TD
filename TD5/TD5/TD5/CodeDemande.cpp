@@ -99,25 +99,31 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 
 void ecrireObservation(const string& nomFichier, size_t index, const string& observation)
 {
-	//je vois rien
-
-
-
-
 	// TODO: Ouvrir un fichier en lecture/écriture binaire.
-	
+
+	fstream f_InOut;
+	f_InOut.open(nomFichier, ios::binary | ios::in | ios::out);
+
 	// TODO: Se positionner (têtes de lecture et d'écriture) au début de la cible 
 	//       à l'index donné. On parle ici de l'index dans le fichier, donc 0 est
 	//       la première cible dans le fichier, etc.
-	
+	f_InOut.seekg(index, ios::beg);
+
+
 	// TODO: Lire cette cible.
 	//       ATTENTION! Vous ne devez lire que cette cible isolée, pas tout le
 	//       tableau.
-	
+	Cible cible;
+	f_InOut.read((char*)& cible, sizeof(cible));
+
 	// TODO: Copier l'observation donnée en paramètre dans la cible.
 	//       Astuce : strcpy()
-	
+	//vnana
+
+	strcpy(cible, observation);
+
 	// TODO: Réécrire la cible (et seulement celle-là) dans le fichier.
+	f_InOut.seekp(index, ios::beg);
 }
 
 
