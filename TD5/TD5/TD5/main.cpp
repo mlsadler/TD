@@ -100,15 +100,17 @@ void tests_partie1()
 	string nomFichierTestJournal = "fichierTestjournal";
 	bool ok;
 	ecrireJournalDetection(nomFichierTestJournal, exempleJournalDetection, ok);
-	cout << endl<<boolalpha<<"La creation du fichier fonctionne-t-il: " <<ok;
+	cout << endl<<boolalpha<<"La creation du fichier fonctionne-t-il: " <<ok << endl;
 
 
 
 	//TODO: Ajouter une observation (ecrireObservation) au fichier créé ci-dessus à l'indice 1 (deuxième cible).
 	//NOTE: Même chose que ci-dessus: la taille du fichier ne devrait pas avoir changée, et dans l'éditeur binaire vous devriez voir le texte après le deuxième ID.
 	//
-
-	ecrireObservation(fichier.data, )
+	string observation = "Cela fonctionne";
+	cout << tableauCibles2[2].observation << endl;
+	ecrireObservation(nomFichierTestJournal, 2, observation);
+	cout << tableauCibles2[2].observation;
 }
 
 void tests_partie2()
