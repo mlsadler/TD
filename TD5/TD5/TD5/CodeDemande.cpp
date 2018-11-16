@@ -15,6 +15,7 @@
 #include <ctime>
 #include <fstream>
 #include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -118,7 +119,6 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 
 	// TODO: Copier l'observation donnée en paramètre dans la cible.
 	//       Astuce : strcpy()
-	//vnana
 
 	strcpy(cible, observation);
 
