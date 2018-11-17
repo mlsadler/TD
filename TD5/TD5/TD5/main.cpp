@@ -117,7 +117,7 @@ void tests_partie2()
 	//TODO: Allouer une liste de cibles (allouerListe) de capacité 2; vérifier que la capacité est la bonne et que le nombre d'éléments est zéro.
 	int capacite = 2;
 	ListeCibles listeTest = allouerListe(capacite);
-	cout << listeTest.nbElements;
+	cout << listeTest.capacite;
 
 	//TODO: Ajouter une cible la liste; ça devrait fonctionner.
 	//ajouterCible(listeTest, );//////////////////////////////////////////////////////////////////////what de la fuck?

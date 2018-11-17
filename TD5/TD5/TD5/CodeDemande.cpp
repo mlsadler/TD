@@ -149,6 +149,8 @@ ListeCibles allouerListe(size_t capacite)
 	// TODO: Allouer un tableau de 'Cible' de la taille demandée.
 	ListeCibles listeDonnee;
 	listeDonnee.elements= new Cible[capacite];
+	listeDonnee.capacite = capacite;
+	listeDonnee.nbElements = 0;
 	return listeDonnee;
 }
 
