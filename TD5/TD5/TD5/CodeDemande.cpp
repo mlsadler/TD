@@ -98,12 +98,13 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 	}
 	else {
 		ok = true;
-	}
-	// TODO: Écrire les paramètres de mission dans le fichier.
-	fichier.write((char*)& journal.parametres, sizeof(journal.parametres)); ////////////////// est-ce que il a un parametre par element ou 1 pour tous
+		// TODO: Écrire les paramètres de mission dans le fichier.
+		fichier.write((char*)& journal.parametres, sizeof(journal.parametres)); ////////////////// est-ce que il a un parametre par element ou 1 pour tous
 
-	// TODO: Écrire les cibles dans le fichier.
-	ecrireCibles(fichier, journal.cibles);
+		// TODO: Écrire les cibles dans le fichier.
+		ecrireCibles(fichier, journal.cibles);
+	}
+	
 
 	
 }
@@ -175,27 +176,24 @@ JournalDetection lireJournalDetection(const string& nomFichier, bool& ok)
 	}
 	else {
 		ok = true;
+		// TODO: Lire les paramètres de mission
+		fichierLire.seekg(0, ios::beg);
+		fichierLire.read((char*)& journalDetection.parametres, sizeof(journalDetection.parametres));
+
+		// TODO: Compter le nombre de cibles dans le fichier.
+		int nbCibles = (sizeof(fichierLire) - sizeof(journalDetection.parametres)) / sizeof(Cible);
+
+		// TODO: Allouer la liste de cibles avec la bonne capacité.
+		journalDetection.cibles = allouerListe(nbCibles);
+
+		// TODO: Lire les cibles.
+		fichierLire.seekg(sizeof(journalDetection.parametres), ios::beg);
+		lireCibles(fichierLire, journalDetection.cibles);
+
+		return journalDetection;
 	}
 
-	// TODO: Lire les paramètres de mission
-	fichierLire.seekg(0, ios::beg);
-	fichierLire.read((char*)& journalDetection.parametres, sizeof(journalDetection.parametres));
-
-	// TODO: Compter le nombre de cibles dans le fichier.
-	int nbCibles = 0;
-	while (fichierLire.peek() != EOF){
-		fichierLire.read((char*)& journalDetection.cibles.elements , sizeof(journalDetection.cibles.elements));
-		nbCibles++;
-	}
-
-	// TODO: Allouer la liste de cibles avec la bonne capacité.
-	journalDetection.cibles = allouerListe(nbCibles);
-
-	// TODO: Lire les cibles.
-	fichierLire.seekg(sizeof(journalDetection.parametres), ios::beg);
-	lireCibles(fichierLire, journalDetection.cibles);
-
-	return journalDetection;
+	
 }
 
 #pragma endregion //}
