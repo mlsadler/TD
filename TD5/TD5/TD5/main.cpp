@@ -133,16 +133,27 @@ void tests_partie2()
 	cout << "Le id de la premier cible est supposer etre 1: " << listeTest.elements[0].id<<endl;
 	cout << "Le id de la deuxieme cible est supposer etre 2: " << listeTest.elements[1].id << endl;
 	//TODO: Conserver le pointeur vers le tableau de cibles dans une variable.
-	/////////////////////////////////////////////////////////////////////////////////////////// je sais pas quoi faire ici felix
+	string pointeur;
+	cout<<&listeTest.elements<<endl;
+
 	//TODO: Désallouer la liste (desallouerListe); vérifier que les valeurs sont à zéro.
 	desallouerListe(listeTest);
-	cout<<"La capacite de la liste est maintenant de: "<<listeTest.c<<endl;
+	cout << "Ce que contient la liste d'element est: " << listeTest.elements << endl;
+	cout<<"La capacite de la liste est maintenant de: "<<listeTest.capacite<<endl;
+	cout << "Le nombre de d'elements est de: " << listeTest.nbElements << endl;
+
 
 	//TODO: Allouer une nouvelle liste de cibles de capacité 2; vérifier que son pointeur est le même que celui conservé ci-dessus.  NOTE: Il n'y a pas de manière dans le standard ISO C++ pour vérifier que la mémoire a bien été désallouée.  Ce test n'est donc pas standard et pourrait échouer même si le programme est correct, mais on a la garantie qu'il peut réussir uniquement si la désallocation est faite.
+	listeTest = allouerListe(2);
+	cout << &listeTest.elements << endl;
+
+
 	//TODO: Désallouer cette deuxième liste.
+	desallouerListe(listeTest);
+
 
 	//NOTE: lireJournalDetection est directement testé par ce qu'il y a à faire dans le main.
-}
+	}
 
 int main ( )
 {
@@ -157,26 +168,61 @@ int main ( )
 	Cible c11 = {11, {38.140728, -76.426494}, "Triangle gris, O orange", "cible_11.jpg"};
 	
 	// TODO: Lire le journal de détection "Cibles.data".
+	JournalDetection journalDetection;
+	bool ok;
+	journalDetection= lireJournalDetection("Cibles.data", ok);
 	
 	// TODO: Faire la vérification d'erreur et terminer le programme avec un
 	//       message s'il y a erreur.
-	
-	// TODO: Afficher le journal.  (Devrait afficher un journal avec 10 cibles ayant des données valides.)
-	
-	// TODO: Retirer la cible 5 de la liste du journal.
-	// TODO: Ajouter la cible 11 (variable 'c11' ci-dessus) à la liste du journal.
-	// TODO: Afficher les cibles pour vérifier que les opérations ci-dessus ont bien fonctionnées.
-	
-	// TODO: Écrire le journal de détection dans "Cibles_final.data".
-	
-	// TODO: Écrire l'observation (variable 'observation' ci-dessus) dans la
-	//       deuxième cible du fichier créé ci-dessus.
-	
-	// TODO: Lire ce nouveau journal et l'afficher.  Toutes les cibles (autre que la 5 qu'on a enlevée) devrait y être, et la nouvelle observation devrait être sur la deuxième cible (qui a aussi l'ID 2, mais c'est une coïncidence).
+	if (ok == true) {
 
-	// TODO: Désallouer les deux listes de cibles.
+		// TODO: Afficher le journal.  (Devrait afficher un journal avec 10 cibles ayant des données valides.)
+		afficherJournal(journalDetection);
+		// TODO: Retirer la cible 5 de la liste du journal.
+
+		retirerCible(journalDetection.cibles, 5);
+
+		// TODO: Ajouter la cible 11 (variable 'c11' ci-dessus) à la liste du journal.
+		ajouterCible(journalDetection.cibles, c11);
+
+		// TODO: Afficher les cibles pour vérifier que les opérations ci-dessus ont bien fonctionnées.
+		for (int i = 0; i < journalDetection.cibles.nbElements; i++) {
+			afficherCible(journalDetection.cibles.elements[i]);// fontion marche pas cible vs *cible mais le chagement fonctionne
+		}
+
+		// TODO: Écrire le journal de détection dans "Cibles_final.data".
+		ecrireJournalDetection(nomFichierCiblesFinal, journalDetection, ok);
+		if (ok == true) {
+			// TODO: Écrire l'observation (variable 'observation' ci-dessus) dans la
+			//       deuxième cible du fichier créé ci-dessus.
+			ecrireObservation(nomFichierCiblesFinal, 1, observation);
+
+			// TODO: Lire ce nouveau journal et l'afficher.  Toutes les cibles (autre que la 5 qu'on a enlevée) devrait y être, et la nouvelle observation devrait être sur la deuxième cible (qui a aussi l'ID 2, mais c'est une coïncidence).
+			JournalDetection journalDetectionFinal;
+			journalDetectionFinal = lireJournalDetection(nomFichierCiblesFinal, ok);
+			if (ok == true) {
+				afficherJournal(journalDetectionFinal);
+
+
+				// TODO: Désallouer les deux listes de cibles.
+				desallouerListe(journalDetection.cibles);
+				desallouerListe(journalDetectionFinal.cibles);
+
+				// TODO: Faire la vérification d'erreur et terminer le programme avec un
+				//       message s'il y a erreur.
+				return 0;
+			}
+			else {
+				cout << "Il y a eu une erreur lors de la compilation du ficher.";
+			}
+		}
+		else {
+			cout << "Il y a eu une erreur lors de la compilation du fichier.";
+		}
+	}
+	else {
+		cout << "Il y a eu une erreur lors de la compilation du fichier.";
+	}
 	
-	// TODO: Faire la vérification d'erreur et terminer le programme avec un
-	//       message s'il y a erreur.
-	return 0;
 }
+

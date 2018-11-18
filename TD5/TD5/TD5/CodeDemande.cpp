@@ -127,7 +127,7 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 	//       ATTENTION! Vous ne devez lire que cette cible isolée, pas tout le
 	//       tableau.
 	Cible cible;
-	f_InOut.read((char*)& cible, sizeof(Cible));
+	f_InOut.read((char*)& cible, sizeof(cible));
 	
 
 	// TODO: Copier l'observation donnée en paramètre dans la cible.
@@ -138,7 +138,7 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 	strcpy(cible.observation, observationC);
 
 	// TODO: Réécrire la cible (et seulement celle-là) dans le fichier.
-	f_InOut.seekg(index * sizeof(Cible) + sizeof(ParametresMission), ios::beg);
+	f_InOut.seekp(index * sizeof(Cible) + sizeof(ParametresMission), ios::beg);
 	f_InOut.write((char*)& cible, sizeof(cible));
 }
 
@@ -159,8 +159,10 @@ void desallouerListe(ListeCibles& cibles)
 {
 	// TODO: Désallouer le tableau d'élément.
 	// TODO: Remettre les membres à zéro.
-	delete[] &cibles.elements;
+	delete cibles.elements;  
 	cibles.elements = nullptr;
+	cibles.capacite = 0;
+	cibles.nbElements = 0;
 }
 
 
@@ -173,7 +175,7 @@ JournalDetection lireJournalDetection(const string& nomFichier, bool& ok)
 	ifstream fichierLire;
 	fichierLire.open(nomFichier, ios::binary);
 	// TODO: Indiquer la réussite ou l'échec de l'ouverture dans 'ok'.
-	if (fichierLire.fail()) { ////////////////////////////////////////////////////// est ce que je devrais mettre tous le reste de la foncrion dans le if
+	if (fichierLire.fail()) {
 		ok = false;
 	}
 	else {
@@ -183,7 +185,12 @@ JournalDetection lireJournalDetection(const string& nomFichier, bool& ok)
 		fichierLire.read((char*)& journalDetection.parametres, sizeof(journalDetection.parametres));
 
 		// TODO: Compter le nombre de cibles dans le fichier.
-		int nbCibles = (sizeof(fichierLire) - sizeof(journalDetection.parametres)) / sizeof(Cible);
+		int nbCibles = 0;
+		Cible cible;
+		while (fichierLire.peek() != EOF) {
+			fichierLire.read((char*)& cible, sizeof(cible));
+			nbCibles++;
+		}
 
 		// TODO: Allouer la liste de cibles avec la bonne capacité.
 		journalDetection.cibles = allouerListe(nbCibles);
@@ -192,10 +199,9 @@ JournalDetection lireJournalDetection(const string& nomFichier, bool& ok)
 		fichierLire.seekg(sizeof(journalDetection.parametres), ios::beg);
 		lireCibles(fichierLire, journalDetection.cibles);
 
-		return journalDetection;
-	}
 
-	
+	}
+	return journalDetection;
 }
 
 #pragma endregion //}
