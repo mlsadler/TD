@@ -1,5 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// VOTRE ENTÊTE ICI
+/// \file    CodeDemande.cpp
+/// \author  Félix Dumont et Mark Weber-Sadler
+/// \version 2018-11-18
+///
+/// Définitions des fonctions qui serviront à lire les rapports de détections de cibles
 ////////////////////////////////////////////////////////////////////////////////
 
 #pragma region "Inclusions" //{
@@ -26,6 +30,9 @@ using namespace std;
 
 #pragma region "Fonctions" //{
 
+// Cette fonction ajoute une cible à la fin de la liste si il y a de la place dans cette liste
+// in: element
+// in/out: liste
 void ajouterCible(ListeCibles& liste, const Cible& element)
 {
 	// TODO: S'il reste de la place, ajouter l'élément à la fin.
@@ -35,7 +42,9 @@ void ajouterCible(ListeCibles& liste, const Cible& element)
 	}
 }
 
-
+// Retirer de la liste la cible avec l'id mentionné si celui-ci existe
+// in: id
+// in/out: liste
 void retirerCible(ListeCibles& liste, uint32_t id)
 {
 	// TODO: Rechercher la cible avec le même ID et le retirer de la liste si
@@ -44,19 +53,17 @@ void retirerCible(ListeCibles& liste, uint32_t id)
 
 	for (int i = 0; i < liste.nbElements - 1; i++) {
 		if (liste.elements[i].id == id) {
-			for (int j = i; j < liste.nbElements - 1; j++) {
+			for (int j = i; j < liste.nbElements - 1; j++)
 				liste.elements[j] = liste.elements[j + 1];
-
-			}
 			liste.nbElements--;
 		}
-		else if (liste.elements[liste.nbElements - 1].id == id) {
+		else if (liste.elements[liste.nbElements - 1].id == id)
 			liste.nbElements--;
-		}
 	}
 }
 
-
+// Cette fonction lit une cible à la position courante et l'ajoute à la liste
+// in/out: fichier, cibles
 void lireCibles(istream& fichier, ListeCibles& cibles)
 {
 	// TODO: Tant que la fin de fichier n'est pas atteinte :
@@ -67,25 +74,24 @@ void lireCibles(istream& fichier, ListeCibles& cibles)
 	while (fichier.peek() != EOF) {
 		fichier.read((char*)& cible, sizeof(cible));
 		ajouterCible(cibles, cible);
-
 	}
 }
 
-
+// Cette fonction écrit tout les éléments de la liste dnas un fichier à partir de la position courante
+// in: cibles
+// in/out: fichier
 void ecrireCibles(ostream& fichier, const ListeCibles& cibles)
 {
 	// TODO: Écrire tous les éléments de la liste dans le fichier à partir de la position courante.
 
-	for (int i = 0; i < cibles.nbElements; i++) {
+	for (int i = 0; i < cibles.nbElements; i++)
 		fichier.write((char*)& cibles.elements[i], sizeof(cibles.elements[i]));
-
-	}
-
-
 }
 
 
-
+// Cette fonction écrit dans un fichier binaire le contenu du journal detection
+// in: nomFichier, journal
+// out: ok
 void ecrireJournalDetection(const string& nomFichier, const JournalDetection& journal, bool& ok)
 {
 	// TODO: Ouvrir un fichier en écriture binaire.
@@ -93,9 +99,8 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 	fichier.open(nomFichier, ios::binary);
 
 	// TODO: Indiquer la réussite ou l'échec de l'ouverture dans 'ok'.
-	if (fichier.fail()) {
+	if (fichier.fail())
 		ok = false;
-	}
 	else {
 		ok = true;
 		// TODO: Écrire les paramètres de mission dans le fichier.
@@ -104,16 +109,13 @@ void ecrireJournalDetection(const string& nomFichier, const JournalDetection& jo
 		// TODO: Écrire les cibles dans le fichier.
 		ecrireCibles(fichier, journal.cibles);
 	}
-	
-
-	
 }
 
-
+// Cette fonction remplace à l'index donné une observation dans un fichier
+// in: nomFichier, observation, index
 void ecrireObservation(const string& nomFichier, size_t index, const string& observation)
 {
 	// TODO: Ouvrir un fichier en lecture/écriture binaire.
-
 	fstream f_InOut;
 	f_InOut.open(nomFichier, ios::binary | ios::in | ios::out);
 
@@ -129,7 +131,6 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 	Cible cible;
 	f_InOut.read((char*)& cible, sizeof(cible));
 	
-
 	// TODO: Copier l'observation donnée en paramètre dans la cible.
 	//       Astuce : strcpy()
 
@@ -142,7 +143,8 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 	f_InOut.write((char*)& cible, sizeof(cible));
 }
 
-
+// Cette fonction crée une listeDonnee et alloue un tableau de cible dans à la taille demandée
+// in: capacite
 ListeCibles allouerListe(size_t capacite)
 {
 	// TODO: Créer une 'ListeDonnee' vide (nbElements = 0) avec la capacité donnée.
@@ -154,7 +156,8 @@ ListeCibles allouerListe(size_t capacite)
 	return listeDonnee;
 }
 
-
+// Cette fonction désalloue un tableau d'élément et remets ses membres à zero
+// in/out: cibles
 void desallouerListe(ListeCibles& cibles)
 {
 	// TODO: Désallouer le tableau d'élément.
@@ -165,19 +168,20 @@ void desallouerListe(ListeCibles& cibles)
 	cibles.nbElements = 0;
 }
 
-
+// Cette fonction  lit le contenu du journal de détection, soit les paramètres de missions et les cibles
+// in: nomFichier
+// out: ok
 JournalDetection lireJournalDetection(const string& nomFichier, bool& ok)
 {
 	JournalDetection journalDetection;
-
 
 	// TODO: Ouvrir un fichier en lecture binaire.
 	ifstream fichierLire;
 	fichierLire.open(nomFichier, ios::binary);
 	// TODO: Indiquer la réussite ou l'échec de l'ouverture dans 'ok'.
-	if (fichierLire.fail()) {
+	if (fichierLire.fail()) 
 		ok = false;
-	}
+
 	else {
 		ok = true;
 		// TODO: Lire les paramètres de mission
@@ -198,8 +202,6 @@ JournalDetection lireJournalDetection(const string& nomFichier, bool& ok)
 		// TODO: Lire les cibles.
 		fichierLire.seekg(sizeof(journalDetection.parametres), ios::beg);
 		lireCibles(fichierLire, journalDetection.cibles);
-
-
 	}
 	return journalDetection;
 }

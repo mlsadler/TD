@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-//  \file    CodeFourni.cpp
+/// \file    CodeFourni.cpp
 /// \author  Charles Hosson et François-R Boyer
 /// \version 2018-11-06
 ///

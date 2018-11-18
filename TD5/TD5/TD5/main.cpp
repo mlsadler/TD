@@ -1,5 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// VOTRE ENTÊTE ICI
+/// \file    CodeDemande.hpp
+/// \author  Félix Dumont(1954787) et Mark Weber-Sadler(1947609)
+/// \version 2018-11-18
+///
+/// Ce programme lit les rapports de détections de cibles 
+/// pour une competition de drone
 ////////////////////////////////////////////////////////////////////////////////
 
 #pragma region "Inclusions" //{
@@ -186,9 +191,8 @@ int main ( )
 		ajouterCible(journalDetection.cibles, c11);
 
 		// TODO: Afficher les cibles pour vérifier que les opérations ci-dessus ont bien fonctionnées.
-		for (int i = 0; i < journalDetection.cibles.nbElements; i++) {
-			afficherCible(journalDetection.cibles.elements[i]);// fontion marche pas cible vs *cible mais le chagement fonctionne
-		}
+		for (int i = 0; i < journalDetection.cibles.nbElements; i++)
+			afficherCible(journalDetection.cibles.elements[i]);
 
 		// TODO: Écrire le journal de détection dans "Cibles_final.data".
 		ecrireJournalDetection(nomFichierCiblesFinal, journalDetection, ok);
@@ -212,17 +216,13 @@ int main ( )
 				//       message s'il y a erreur.
 				return 0;
 			}
-			else {
-				cout << "Il y a eu une erreur lors de la compilation du ficher.";
-			}
+			else 
+				cout << "Il y a eu une erreur lors de la compilation du ficher.";	
 		}
-		else {
+		else 
 			cout << "Il y a eu une erreur lors de la compilation du fichier.";
-		}
 	}
-	else {
+	else 
 		cout << "Il y a eu une erreur lors de la compilation du fichier.";
-	}
-	
 }
 
