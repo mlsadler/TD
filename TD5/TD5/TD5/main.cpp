@@ -108,8 +108,12 @@ void tests_partie1()
 	//
 
 	ecrireObservation(nomFichierTestJournal, 1, "blablabla");
-	////COUT QUOI?
-
+	ifstream fichierTestJournal;
+	fichierTestJournal.open(nomFichierTestJournal, ios::binary);
+	fichierTestJournal.seekg(sizeof(Cible) + sizeof(ParametresMission), ios::beg);
+	Cible cibleTest;
+	fichierTestJournal.read((char*)& cibleTest, sizeof(Cible));
+	cout << "Verification de l'ecriture de l'observation: " << cibleTest.observation << endl;
 }
 
 void tests_partie2()
