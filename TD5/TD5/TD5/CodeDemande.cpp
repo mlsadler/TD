@@ -120,8 +120,8 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 	// TODO: Se positionner (têtes de lecture et d'écriture) au début de la cible 
 	//       à l'index donné. On parle ici de l'index dans le fichier, donc 0 est
 	//       la première cible dans le fichier, etc.
-	f_InOut.seekg(index*sizeof(Cible), ios::beg);
-	f_InOut.seekp(index*sizeof(Cible), ios::beg);
+	f_InOut.seekg(index*sizeof(Cible)+sizeof(ParametresMission), ios::beg);
+	
 
 	// TODO: Lire cette cible.
 	//       ATTENTION! Vous ne devez lire que cette cible isolée, pas tout le
@@ -138,7 +138,7 @@ void ecrireObservation(const string& nomFichier, size_t index, const string& obs
 	strcpy(cible.observation, observationC);
 
 	// TODO: Réécrire la cible (et seulement celle-là) dans le fichier.
-	
+	f_InOut.seekg(index * sizeof(Cible) + sizeof(ParametresMission), ios::beg);
 	f_InOut.write((char*)& cible, sizeof(cible));
 }
 
