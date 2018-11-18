@@ -125,10 +125,19 @@ void tests_partie2()
 	cout << "Le nombre d'element est de: " << listeTest.nbElements << endl;
 
 	//TODO: Ajouter une cible la liste; ça devrait fonctionner.
-	//ajouterCible(listeTest, );//////////////////////////////////////////////////////////////////////what de la fuck?
+	Cible cible1,cible2;
+	cible1.id = 1;
+	cible2.id = 2;
+	ajouterCible(listeTest, cible1);
+	ajouterCible(listeTest, cible2);
+	cout << "Le id de la premier cible est supposer etre 1: " << listeTest.elements[0].id<<endl;
+	cout << "Le id de la deuxieme cible est supposer etre 2: " << listeTest.elements[1].id << endl;
 	//TODO: Conserver le pointeur vers le tableau de cibles dans une variable.
-	
+	/////////////////////////////////////////////////////////////////////////////////////////// je sais pas quoi faire ici felix
 	//TODO: Désallouer la liste (desallouerListe); vérifier que les valeurs sont à zéro.
+	desallouerListe(listeTest);
+	cout<<"La capacite de la liste est maintenant de: "<<listeTest.c<<endl;
+
 	//TODO: Allouer une nouvelle liste de cibles de capacité 2; vérifier que son pointeur est le même que celui conservé ci-dessus.  NOTE: Il n'y a pas de manière dans le standard ISO C++ pour vérifier que la mémoire a bien été désallouée.  Ce test n'est donc pas standard et pourrait échouer même si le programme est correct, mais on a la garantie qu'il peut réussir uniquement si la désallocation est faite.
 	//TODO: Désallouer cette deuxième liste.
 
