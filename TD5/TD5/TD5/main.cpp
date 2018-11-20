@@ -138,8 +138,7 @@ void tests_partie2()
 	cout << "Le id de la premier cible est supposer etre 1: " << listeTest.elements[0].id<<endl;
 	cout << "Le id de la deuxieme cible est supposer etre 2: " << listeTest.elements[1].id << endl;
 	//TODO: Conserver le pointeur vers le tableau de cibles dans une variable.
-	string pointeur;
-	cout<<&listeTest.elements<<endl;
+	cout<<"Ceci est la premiere adresse a tester "<<&listeTest.elements<<endl;
 
 	//TODO: Désallouer la liste (desallouerListe); vérifier que les valeurs sont à zéro.
 	desallouerListe(listeTest);
@@ -150,7 +149,7 @@ void tests_partie2()
 
 	//TODO: Allouer une nouvelle liste de cibles de capacité 2; vérifier que son pointeur est le même que celui conservé ci-dessus.  NOTE: Il n'y a pas de manière dans le standard ISO C++ pour vérifier que la mémoire a bien été désallouée.  Ce test n'est donc pas standard et pourrait échouer même si le programme est correct, mais on a la garantie qu'il peut réussir uniquement si la désallocation est faite.
 	listeTest = allouerListe(2);
-	cout << &listeTest.elements << endl;
+	cout <<"Ceci est la deuxieme adresses a comparer et verifier avec la premier "<< &listeTest.elements << endl;
 
 
 	//TODO: Désallouer cette deuxième liste.
